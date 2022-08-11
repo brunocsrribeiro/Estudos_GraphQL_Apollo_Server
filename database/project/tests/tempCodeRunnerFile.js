@@ -1,2 +1,0 @@
-
-  .finnaly(() => db.destroy())

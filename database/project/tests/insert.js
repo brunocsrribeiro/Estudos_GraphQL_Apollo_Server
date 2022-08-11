@@ -11,9 +11,6 @@ db('profiles')
   .catch(err => console.log(err.sqlMessage))
   .finally(() => db.destroy())
 
-// const sudoProfile = {
-  
-// }
 
 // db.insert(sudoProfile)
 //   .into('profiles')
