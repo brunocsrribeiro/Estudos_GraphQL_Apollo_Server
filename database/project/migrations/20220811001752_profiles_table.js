@@ -9,9 +9,7 @@ exports.up = function(knex, Promise) {
     table.string('label').notNullable()
   }).then(() => {
     return knex('profiles').insert([
-      { name: 'user', label: 'User' },
       { name: 'admin', label: 'Administrator' },
-      { name: 'master', label: 'Master' },
     ])
   })
 };
