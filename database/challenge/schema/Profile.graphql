@@ -6,8 +6,10 @@ type Profile {
 
 input InputProfile {
   name: String
+  label: String
 }
 
 input FilterProfile {
-  id: ID
+  id: Int
+  name: String
 }

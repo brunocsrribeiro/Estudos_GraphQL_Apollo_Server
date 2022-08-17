@@ -1,11 +1,20 @@
 const db = require('../../config/db')
 
 module.exports = {
-  async profiles() {
-
+  profiles() {
+    return db('profiles')
   },
 
-  async profile(_, { filter }) {
+  profile(_, { filter }) {
+    if (!filter) return null
+    const { id, name } = filter
 
+    if (id) {
+      return db('profiles').where({ id }).first()
+    } else if (name) {
+      return db('profiles').where({ name }).first()
+    } else {
+      return null
+    }
   }
 }

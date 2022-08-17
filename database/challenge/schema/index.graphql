@@ -1,3 +1,4 @@
-#import User, Profile from 'User.graphql'
+#import User from 'User.graphql'
+#import Profile from 'Profile.graphql'
 #import Mutation from 'Mutation.graphql'
 #import Query from 'Query.graphql'
