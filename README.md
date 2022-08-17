@@ -1,6 +1,6 @@
 # Curso GraphQL
 
-Este repositório é criado especificamente para o estudo de GraphQL. Os códigos desenvolvidos neste repositório são feitos a partir do curso online "GaphQL: Criando APIs Profissionais e Flexíveis" da plataforma Udemy. 
+Este repositório é criado especificamente para o estudo de GraphQL. Os códigos desenvolvidos neste repositório são feitos a partir do curso online "GraphQL: Criando APIs Profissionais e Flexíveis" da plataforma Udemy. 
 
 
 ## Assuntos abordados:
