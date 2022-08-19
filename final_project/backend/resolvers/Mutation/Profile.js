@@ -7,7 +7,8 @@ module.exports = {
       const [ id ] = await db.insert({ ...data })
         .into('profiles')
 
-      return db('profiles')
+      return db.select()
+        .from('profiles')
         .where({ id })
         .first()
     } catch (e) {
@@ -20,12 +21,12 @@ module.exports = {
       const profile = await getProfile(_, { filter })
       if (profile) {
         const { id } = profile
-        await db('users_profiles')
+        await db.delete()
+          .from('users_profiles')
           .where({ profile_id: id })
-          .delete()
-        await db('profiles')
+        await db.delete()
+          .from('profiles')
           .where({ id })
-          .delete()
       }
 
       return profile
@@ -39,9 +40,9 @@ module.exports = {
       const profile = await getProfile(_, { filter })
       if (profile) {
         const { id } = profile
-        await db('profiles')
+        await db.update({ ...data })
+          .from('profiles')
           .where({ id })
-          .update({ ...data })
       }
 
       return { ...profile, ...data }

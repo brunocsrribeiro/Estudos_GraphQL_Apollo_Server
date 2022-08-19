@@ -4,11 +4,13 @@ require('dotenv/config')
  * @type { Object.<string, import("knex").Knex.Config> }
  */
 module.exports = {
-  client: process.env.DB_CLIENT || 'mysql',
+  client: process.env.APP_DB_CLIENT || 'mysql',
   connection: {
-    database: process.env.DB_NAME,
-    user:     process.env.DB_USER || 'root',
-    password: process.env.DB_PASS
+    host: process.env.APP_DB_HOST || 'localhost',
+    port: process.env.APP_DB_PORT || 4000,
+    database: process.env.APP_DB_NAME,
+    user: process.env.APP_DB_USER || 'root',
+    password: process.env.APP_DB_PASS
   },
   pool: {
     min: 2,

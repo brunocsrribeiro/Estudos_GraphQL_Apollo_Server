@@ -2,7 +2,8 @@ const db = require('../../config/db')
 
 module.exports = {
   profiles() {
-    return db('profiles')
+    return db.select('*')
+      .from('profiles')
   },
 
   profile(_, { filter }) {
@@ -10,9 +11,15 @@ module.exports = {
     const { id, name } = filter
 
     if (id) {
-      return db('profiles').where({ id }).first()
+      return db.select()
+        .from('profiles')
+        .where({ id })
+        .first()
     } else if (name) {
-      return db('profiles').where({ name }).first()
+      return db.select()
+        .from('profiles')
+        .where({ name })
+        .first()
     } else {
       return null
     }

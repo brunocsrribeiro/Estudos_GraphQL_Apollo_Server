@@ -2,7 +2,8 @@ const db = require('../../config/db')
 
 module.exports = {
   async profiles(user) {
-    return db('profiles')
+    return db.select('*')
+      .from('profiles')
       .join(
         'users_profiles',
         'profiles.id',

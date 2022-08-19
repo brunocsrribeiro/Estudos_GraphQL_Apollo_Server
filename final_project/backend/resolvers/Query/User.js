@@ -2,7 +2,8 @@ const db = require('../../config/db')
 
 module.exports = {
   users() {
-    return db('users')
+    return db.select('*')
+      .from('users')
   },
 
   async user(_, { filter }) {
@@ -10,9 +11,16 @@ module.exports = {
     const { id, email } = filter
 
     if (id) {
-      return db('users').where({ id }).first()
+      return db.select()
+        .from('users')
+        .where({ id })
+        .first()
     } else if (email) {
-      return db('users').where({ email }).where({ email }).first()
+      return db.select()
+        .from('users')
+        .where({ email })
+        .where({ email })
+        .first()
     } else {
       return null
     }

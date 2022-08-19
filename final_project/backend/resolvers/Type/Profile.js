@@ -1,13 +1,14 @@
 const db = require('../../config/db')
 
 module.exports = {
-  async profiles(user) {
-    return db('profiles')
+  async users(profile) {
+    return db.select('*')
+      .from('users')
       .join(
         'users_profiles',
-        'profiles.id',
-        'users_profiles.profile_id'
+        'users.id',
+        'users_profiles.user_id'
       )
-      .where({ user_id: user.id })
+      .where({ profile_id: profile.id })
   }
 }

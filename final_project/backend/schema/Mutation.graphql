@@ -1,4 +1,18 @@
 type Mutation {
+  # Mutations of User
+  newUser(
+    data: InputUser!
+  ): User!
+
+  removeUser(
+    filter: FilterUser!
+  ): User
+
+  changeUser(
+    filter: FilterUser!
+    data: InputUser!
+  ): User!
+
   # Mutations of Profile
   newProfile(
     data: InputProfile!

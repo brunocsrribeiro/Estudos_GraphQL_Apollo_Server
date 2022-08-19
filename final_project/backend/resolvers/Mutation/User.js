@@ -26,7 +26,10 @@ module.exports = {
         }).into('users_profiles')
       }
 
-      return db('users').where({ id }).first()
+      return db.select()
+        .from('users')
+        .where({ id })
+        .first()
     } catch (e) {
       throw new Error(e.sqlMessage)
     }
@@ -37,10 +40,12 @@ module.exports = {
       const user = await getUser(_, { filter })
       if (user) {
         const { id } = user
-        await db('users_profiles')
-          .where({ user_id: id }).delete()
-        await db('users')
-          .where({ id }).delete()
+        await db.delete()
+          .from('users_profiles')
+          .where({ user_id: id })
+        await db.delete()
+          .from('users')
+          .where({ id })
       }
 
       return user
@@ -55,9 +60,9 @@ module.exports = {
       if (user) {
         const { id } = user
         if (data.profiles) {
-          await db('users_profiles')
+          await db.delete()
+            .from('users_profiles')
             .where({ user_id: id })
-            .delete()
 
           for(let filter of data.profiles) {
             const profile = await getProfile(_, { filter })
@@ -71,10 +76,9 @@ module.exports = {
 
         delete data.profiles
 
-        await db('users')
+        await db.upadate({ ...data })
+          .from('users')
           .where({ id })
-          .upadate({ ...data })
-
         }
 
         return !user ? null : { ...user, ...data }
