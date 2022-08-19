@@ -1,5 +1,9 @@
 type Mutation {
   # Mutations of User
+  registerUser(
+    data: InputRegisterUser!
+  ): User!
+
   newUser(
     data: InputUser!
   ): User!

@@ -1,18 +1,36 @@
+const bcrypt = require('bcrypt-nodejs')
 const db = require('../../config/db')
 const { profile: getProfile } = require('../Query/Profile')
 const { user: getUser } = require('../Query/User')
 
-module.exports = {
+const mutations = {
+  registerUser(_,{ data }) {
+    return mutations.newUser(_, {
+      data: {
+        name: data.name,
+        email: data.email,
+        password: data.password,
+      }
+    })
+  },
+
   async newUser(_, { data }) {
     try {
       const profilesIds = []
-      if (data.profiles) {
-        for(let filter of data.profiles) {
-          const profile = await getProfile(_, { filter })
 
-          if (profile) profilesIds.push(profile.id)
-        }
+      if (!data.profiles || !data.profiles.length) {
+        data.profiles = [{ name: 'user' }]
       }
+
+      for(let filter of data.profiles) {
+        const profile = await getProfile(_, { filter })
+
+        if (profile) profilesIds.push(profile.id)
+      }
+
+      // criptografar a senha
+      const salt = bcrypt.genSaltSync()
+      data.password = bcrypt.hashSync(data.password, salt)
 
       delete data.profiles
 
@@ -74,6 +92,12 @@ module.exports = {
           }
         }
 
+        if (data.password) {
+          // criptografar a senha
+          const salt = bcrypt.genSaltSync()
+          data.password = bcrypt.hashSync(data.password, salt)
+        }
+
         delete data.profiles
 
         await db.upadate({ ...data })
@@ -87,3 +111,5 @@ module.exports = {
     }
   }
 }
+
+module.exports = mutations
