@@ -14,7 +14,9 @@ const mutations = {
     })
   },
 
-  async newUser(_, { data }) {
+  async newUser(_, { data }, context) {
+    context && context.validateAdmin()
+
     try {
       const profilesIds = []
 
@@ -53,7 +55,9 @@ const mutations = {
     }
   },
 
-  async removeUser(_, { filter }) {
+  async removeUser(_, { filter }, context) {
+    context && context.validateFilterUser(filter)
+
     try {
       const user = await getUser(_, { filter })
       if (user) {
@@ -72,12 +76,14 @@ const mutations = {
     }
   },
 
-  async changeUser(_, { filter, data }) {
+  async changeUser(_, { filter, data }, context) {
+    context && context.validateFilterUser(filter)
+
     try {
       const user = await getUser(_, { filter })
       if (user) {
         const { id } = user
-        if (data.profiles) {
+        if (context.admin && data.profiles) {
           await db.delete()
             .from('users_profiles')
             .where({ user_id: id })

@@ -23,12 +23,15 @@ module.exports = {
       return getLoggedInUser(user)
   },
 
-  users() {
+  users(_, args, context) {
+    context && context.validateAdmin()
     return db.select('*')
       .from('users')
   },
 
-  async user(_, { filter }) {
+  async user(_, { filter }, context) {
+    context && context.validateFilterUser(filter)
+
     if (!filter) return null
     const { id, email } = filter
 

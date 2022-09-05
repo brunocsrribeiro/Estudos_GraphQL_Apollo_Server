@@ -1,12 +1,16 @@
 const db = require('../../config/db')
 
 module.exports = {
-  profiles() {
+  profiles(_, args, context) {
+    context && context.validateAdmin()
+
     return db.select('*')
       .from('profiles')
   },
 
-  profile(_, { filter }) {
+  profile(_, { filter }, context) {
+    context && context.validateAdmin()
+
     if (!filter) return null
     const { id, name } = filter
 
