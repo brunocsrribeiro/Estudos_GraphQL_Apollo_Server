@@ -1,7 +1,5 @@
 # frontend
 
-Essa aplicação frontend foi toda criada pela equipe do curso para ser utilizada pelo aluno. O código foi feito utilizando po framework VueJs, e é de autoria da equipe da [Cod3r Cursos Online](https://www.udemy.com/user/cod3r-3/), ficando apenas as implementações de funcionalidade a cargo do aluno para estudos.
-
 ## Project setup
 ```
 npm install

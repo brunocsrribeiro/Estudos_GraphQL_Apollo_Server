@@ -14,7 +14,7 @@ module.exports = async ({ req }) => {
     try {
       let tokenContent = jwt.decode(token,
           process.env.APP_AUTH_SECRET)
-      if (new Date(tokenContent.exp * 1000) > new Date.now()) {
+      if (new Date(tokenContent.exp * 1000) > new Date()) {
           user = tokenContent
       }
     } catch (e) {
